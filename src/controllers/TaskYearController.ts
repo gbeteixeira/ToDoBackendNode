@@ -5,7 +5,7 @@ import { prismaClient } from '../database/prismaClient';
 export class TaskYearController {
   async year(request: Request, response: Response) {
 
-    const { macaddress } = request.body;
+    const { macaddress } = request.params;
 
     const current = new Date();
 

@@ -2,7 +2,6 @@ import { Router } from "express";
 
 //middlewares
 import { TaskValidation } from '../middlewares/TaskValidation'
-import { MacAddressValidation } from '../middlewares/MacAddressValidation'
 
 //controllers
 import { TaskController } from "../controllers/TaskController";
@@ -32,17 +31,18 @@ const monthTaskController = new TaskMonthController();
 const yearTaskController = new TaskYearController();
 
 router.post("/task", TaskValidation, taskController.create);
-router.get("/task/:id", showTaskController.show);
 router.put("/task/:id", TaskValidation, updateTaskController.update);
 router.delete("/task/:id", deleteTaskController.delete);
 router.put("/task/:id/:done", doneTaskController.done);
 
-router.get("/task/filter/all", MacAddressValidation, listTaskController.list);
-router.get("/task/filter/late", MacAddressValidation, lateTaskController.late);
-router.get("/task/filter/today", MacAddressValidation, todayTaskController.today);
-router.get("/task/filter/week", MacAddressValidation, weekTaskController.week);
-router.get("/task/filter/month", MacAddressValidation, monthTaskController.month);
-router.get("/task/filter/year", MacAddressValidation, yearTaskController.year);
+router.get("/task/:id", showTaskController.show);
+
+router.get("/task/filter/all/:macaddress", listTaskController.list);
+router.get("/task/filter/late/:macaddress", lateTaskController.late);
+router.get("/task/filter/today/:macaddress", todayTaskController.today);
+router.get("/task/filter/week/:macaddress", weekTaskController.week);
+router.get("/task/filter/month/:macaddress", monthTaskController.month);
+router.get("/task/filter/year/:macaddress", yearTaskController.year);
 
 
 // export  
