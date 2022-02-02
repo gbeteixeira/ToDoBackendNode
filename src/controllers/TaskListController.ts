@@ -5,7 +5,7 @@ import { prismaClient } from '../database/prismaClient';
 export class TaskListController {
   async list(request: Request, response: Response) {
 
-    const { macaddress } = request.body;
+    const { macaddress } = request.params;
 
     await prismaClient.tasks.findMany({
       where: {
