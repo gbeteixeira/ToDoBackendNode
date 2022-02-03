@@ -28,10 +28,6 @@ export const TaskValidation = async (request: Request, response: Response, next:
     return response.status(400).json({
       error: 'Day and Hour is required!'
     })
-  else if (isPast(new Date(when)))
-    return response.status(400).json({
-      error: 'This day and hour is in the past!'
-    })
   else {
 
     let exist;
@@ -47,6 +43,10 @@ export const TaskValidation = async (request: Request, response: Response, next:
       });
 
     } else {
+      if (isPast(new Date(when)))
+        return response.status(400).json({
+          error: 'This day and hour is in the past!'
+        })
 
       exist = await prismaClient.tasks.findMany({
         where: {
